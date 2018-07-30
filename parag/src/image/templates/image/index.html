@@ -1,0 +1,17 @@
+<h1>Here are all the photos</h1>
+
+{% for item in all_images %}
+	<img src="{{item.file.url}}" width="150" height="150"><br>{{ item.name }}<br>
+	<button type="submit"><a href="{% url 'image:delete-image' item.id %}">Delete</a></button>
+	<button type="submit"><a href="{% url 'image:update-image' item.id %}">edit</a></button><br><br>
+
+{% endfor %}
+
+<br><br><button type="submit"><a href="{% url 'image:add-image' %}">Add image</a></button><br><br>
+
+{% if user.is_authenticated %}
+	<button type="submit"><a href="{% url 'account_logout' %}?next=/image">Logout</a></button><br><br>
+{% else %}
+	<button type="submit"><a href="{% url 'account_login' %}">Login</a></button><br><br>
+{% endif %}
+
